@@ -1,0 +1,26 @@
+version:                '3'
+
+services:
+
+  deeplearning:
+
+      devices:          #this is required
+        - /dev/nvidiactl
+        - /dev/nvidia-uvm
+        - /dev/nvidia0 #in general: /dev/nvidia# where # depends on which gpu card is wanted to be used
+
+      networks:
+        - network
+
+      volumes:
+        - "nvidia_driver_384.90:/usr/local/nvidia:ro"
+
+
+## Driver Volume for CUDA Version
+volumes:
+  nvidia_driver_384.90:
+    external:           true
+
+networks:
+  network:
+    driver:             bridge
